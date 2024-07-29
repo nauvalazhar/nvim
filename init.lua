@@ -1,25 +1,32 @@
--- stolen from https://github.com/KevinPalowa/nvim/
-
-require("nauval.options")
-require("nauval.autocmds")
-require("nauval.keymaps")
-require("nauval.plugins")
-require("nauval.colorscheme")
-require("nauval.cmp")
-require("nauval.lsp")
-require("nauval.telescope")
-require("nauval.presence")
-require("nauval.toggleterm")
-require("nauval.lualine")
-require("nauval.autopairs")
-require("nauval.comment")
-require("nauval.gitsigns")
-require("nauval.nvimtree")
-require("nauval.treesitter")
-require("nauval.bufferline")
-require("nauval.indentline")
-require("nauval.trouble")
-require("nauval.alpha")
-require("nauval.project")
-require("nauval.colorizer")
-require("nauval.whichkey")
+require "user.launch"
+require "user.options"
+require "user.keymaps"
+require "user.autocmds"
+spec "user.colorscheme"
+spec "user.devicons"
+spec "user.treesitter"
+spec "user.mason"
+spec "user.schemastore"
+spec "user.lspconfig"
+spec "user.cmp"
+spec "user.telescope"
+spec "user.none-ls"
+spec "user.illuminate"
+spec "user.gitsigns"
+spec "user.whichkey"
+spec "user.nvimtree"
+spec "user.comment"
+spec "user.lualine"
+spec "user.navic"
+spec "user.breadcrumbs"
+spec "user.harpoon"
+spec "user.neotest"
+spec "user.autopairs"
+spec "user.neogit"
+spec "user.alpha"
+spec "user.project"
+spec "user.indentline"
+spec "user.toggleterm"
+spec "user.fzf"
+spec "user.extras.copilot"
+require "user.lazy"
