@@ -3,7 +3,7 @@ local M = {
 }
 
 function M.config()
-  --require("breadcrumbs").setup()
+  -- require("breadcrumbs").setup()
 end
 
 return M

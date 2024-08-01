@@ -26,7 +26,7 @@ function M.config()
     normal = {
       a = { fg = colors.white, bg = colors.normal },
       b = { fg = colors.white, bg = colors.grey },
-      c = { fg = colors.light, bg = colors.black },
+      c = { fg = colors.light, bg = nil },
     },
 
     insert = { a = { fg = colors.black, bg = colors.insert } },
@@ -42,12 +42,13 @@ function M.config()
 
   local sections = {
     lualine_a = {
-      { "mode", separator = { left = "" }, right_padding = 0 },
+      { "mode", separator = { left = "", right = "" }, right_padding = 0 },
     },
     lualine_b = {
       {
         "filename",
-        path = 1,
+        file_status = true,
+        path = 0,
         symbols = {
           modified = " ●", -- Text to show when the buffer is modified
           alternate_file = "#", -- Text to show to identify the alternate file
@@ -55,14 +56,38 @@ function M.config()
         },
       },
     },
-    lualine_c = {},
-    lualine_x = { "fileformat", "copilot" },
-    lualine_y = { {
-      "filetype",
-      separator = { left = "" },
-      left_padding = 2,
-    } },
-    lualine_z = { { "branch", separator = { right = "" } } },
+    lualine_c = { "branch" },
+    lualine_x = {
+      "location",
+      "fileformat",
+      "copilot",
+      {
+        "diagnostics",
+
+        -- Table of diagnostic sources, available sources are:
+        --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
+        -- or a function that returns a table as such:
+        --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
+        sources = { "nvim_lsp" },
+
+        -- Displays diagnostics for the defined severity types
+        sections = { "error", "warn" },
+
+        diagnostics_color = {
+          -- Same values as the general color option can be used here.
+          error = "DiagnosticError", -- Changes diagnostics' error color.
+          warn = "DiagnosticWarn", -- Changes diagnostics' warn color.
+          info = "DiagnosticInfo", -- Changes diagnostics' info color.
+          hint = "DiagnosticHint", -- Changes diagnostics' hint color.
+        },
+        symbols = { error = " ", warn = " ", info = " ", hint = " " },
+        colored = true, -- Displays diagnostics status in color if set to true.
+        update_in_insert = false, -- Update diagnostics in insert mode.
+        always_visible = true, -- Show diagnostics even if there are none.
+      },
+    },
+    lualine_y = { { "filetype", separator = { left = "", right = "" } } },
+    lualine_z = {},
   }
 
   require("lualine").setup {

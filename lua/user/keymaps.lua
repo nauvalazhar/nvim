@@ -35,6 +35,24 @@ keymap("v", ">", ">gv", opts)
 
 keymap("x", "p", [["_dP]])
 
+-- Misc
+keymap({ "n", "o", "i", "v" }, "<C-g>", function()
+  local current_buf = vim.api.nvim_get_current_buf()
+  local buf_name = vim.api.nvim_buf_get_name(current_buf)
+
+  if buf_name == "" then
+    buf_name = "[No Name]"
+  else
+    buf_name = vim.fn.fnamemodify(buf_name, ":~:.")
+  end
+
+  vim.notify("Current buffer: " .. buf_name, vim.log.levels.INFO, {
+    title = "Buffer Path",
+    timeout = 3000,
+    icon = "📁",
+  })
+end, opts)
+
 vim.cmd [[:amenu 10.100 mousemenu.Goto\ Definition <cmd>lua vim.lsp.buf.definition()<CR>]]
 vim.cmd [[:amenu 10.110 mousemenu.References <cmd>lua vim.lsp.buf.references()<CR>]]
 -- vim.cmd [[:amenu 10.120 mousemenu.-sep- *]]
@@ -51,5 +69,4 @@ keymap({ "n", "x" }, "j", "gj", opts)
 keymap({ "n", "x" }, "k", "gk", opts)
 keymap("n", "<leader>w", ":lua vim.wo.wrap = not vim.wo.wrap<CR>", opts)
 
-
-vim.api.nvim_set_keymap('t', '<C-;>', '<C-\\><C-n>', opts)
+vim.api.nvim_set_keymap("t", "<C-;>", "<C-\\><C-n>", opts)

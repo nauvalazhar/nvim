@@ -1,16 +1,15 @@
 vim.opt.backup = false -- creates a backup file
 vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
-vim.opt.cmdheight = 1 -- more space in the neovim command line for displaying messages
+vim.opt.cmdheight = 0 -- more space in the neovim command line for displaying messages
 vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
 vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
 -- vim.opt.fileencoding = "utf-8" -- the encoding written to a file
-vim.opt.hlsearch = true -- highlight all matches on previous search pattern
-vim.opt.ignorecase = true -- ignore case in search patterns
+vim.opt.hlsearch = true -- highlight all matches on previous search pattern vim.opt.ignorecase = true -- ignore case in search patterns
 vim.opt.mouse = "a" -- allow the mouse to be used in neovim
 vim.opt.pumheight = 10 -- pop up menu height
 vim.opt.pumblend = 10
 vim.opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
-vim.opt.showtabline = 1 -- always show tabs
+vim.opt.showtabline = 0 -- always show tabs
 vim.opt.smartcase = true -- smart case
 vim.opt.smartindent = true -- make indenting smarter again
 vim.opt.splitbelow = true -- force all horizontal splits to go below current window
@@ -60,3 +59,25 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end
   end,
 })
+
+function _G.my_tabline()
+  local devicons = require "nvim-web-devicons"
+  local filename = vim.fn.expand "%:t"
+  local filepath = vim.fn.fnamemodify(vim.fn.expand "%:p:h", ":~:.")
+  local filetype = vim.bo.filetype
+
+  local icon, icon_color = devicons.get_icon_color(filename, filetype, { default = true })
+
+  local s = ""
+  s = s .. "%#TabLineFill#"
+  -- s = s .. "%#TabLineSelLeftRounded#" .. ""
+  s = s .. "%#TabLineSel#" -- Highlight for the file name
+  s = s .. " " .. icon .. " " .. filename .. " "
+  s = s .. "%#TabLineSelRightRounded#" .. ""
+  s = s .. "%#TabLine#" -- Normal highlight for the full path
+  s = s .. " " .. filepath .. "/"
+
+  return s
+end
+
+vim.o.tabline = "%!v:lua.my_tabline()"

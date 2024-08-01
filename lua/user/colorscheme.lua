@@ -2,6 +2,11 @@ local M = {
   "folke/tokyonight.nvim",
   lazy = false, -- make sure we load this during startup if it is your main colorscheme
   priority = 1000, -- make sure to load this before all the other start plugins
+  dependencies = {
+    "projekt0n/github-nvim-theme",
+    "catppuccin/nvim",
+    "oxfist/night-owl.nvim",
+  },
 }
 
 function M.config()
@@ -38,6 +43,13 @@ function M.config()
   require("tokyonight").load()
 
   vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ffffff" })
+  -- vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", fg = "#c0caf5" })
+  -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#ffffff", fg = "#ffffff" })
+  vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE", fg = "#888da4" })
+  vim.api.nvim_set_hl(0, "TabLine", { bg = "NONE", fg = "#888da4" })
+  vim.api.nvim_set_hl(0, "TabLineSel", { bg = "NONE", fg = "#ffffff" })
+  vim.api.nvim_set_hl(0, "TabLineSelLeftRounded", { fg = "#888da4" })
+  vim.api.nvim_set_hl(0, "TabLineSelRightRounded", { fg = "#888da4" })
 end
 
 return M

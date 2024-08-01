@@ -5,8 +5,8 @@ local M = {
 function M.config()
   local wk = require "which-key"
   wk.register {
-    ["<leader>p"] = { "<cmd>FzfLua files<cr>", "Find" },
-    ["<leader>o"] = { "<cmd>FzfLua buffers<cr>", "Find" },
+    ["<C-p>"] = { "<cmd>FzfLua files<cr>", "Find" },
+    ["<TAB>"] = { "<cmd>FzfLua buffers<cr>", "Find" },
   }
 
   local actions = require "fzf-lua.actions"
