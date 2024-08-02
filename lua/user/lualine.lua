@@ -40,6 +40,9 @@ function M.config()
     },
   }
 
+  local my_filename = require("lualine.components.filename"):extend()
+  my_filename.apply_icon = require("lualine.components.filetype").apply_icon
+
   local sections = {
     lualine_a = {
       { "mode", separator = { left = "", right = "" }, right_padding = 0 },
@@ -48,6 +51,7 @@ function M.config()
       {
         "filename",
         file_status = true,
+        separator = { left = "", right = "" },
         path = 0,
         symbols = {
           modified = " ●", -- Text to show when the buffer is modified
@@ -56,11 +60,8 @@ function M.config()
         },
       },
     },
-    lualine_c = { "branch" },
-    lualine_x = {
-      "location",
-      "fileformat",
-      "copilot",
+    lualine_c = {
+      "branch",
       {
         "diagnostics",
 
@@ -86,7 +87,13 @@ function M.config()
         always_visible = true, -- Show diagnostics even if there are none.
       },
     },
-    lualine_y = { { "filetype", separator = { left = "", right = "" } } },
+    lualine_x = {
+      "copilot",
+      "fileformat",
+      "location",
+      { "filetype", separator = { left = "", right = "" } },
+    },
+    lualine_y = {},
     lualine_z = {},
   }
 
@@ -98,11 +105,20 @@ function M.config()
       disabled_filetypes = {
         "NvimTree",
         "Trouble",
+        "ToggleTerm",
+        "alpha",
       },
     },
     sections = sections,
     inactive_sections = sections,
     tabline = {},
+    winbar = {
+      lualine_b = {},
+      lualine_c = {
+        -- { "filename", path = 1 },
+      },
+      lualine_x = {},
+    },
     extensions = {},
   }
 end

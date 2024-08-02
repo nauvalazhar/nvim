@@ -19,22 +19,22 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 end
 
-M.on_attach = function(client, bufnr) 
+M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
 
   if client.supports_method "textDocument/inlayHint" then
-    vim.lsp.inlay_hint.enable(true, {  bufnr })
+    vim.lsp.inlay_hint.enable(true, { bufnr })
   end
 
-  if client.supports_method("textDocument/formatting") then
-    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+  if client.supports_method "textDocument/formatting" then
+    vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = augroup,
       buffer = bufnr,
       callback = function()
         -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
         -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
-        vim.lsp.buf.format({ async = false })
+        vim.lsp.buf.format { async = false }
       end,
     })
   end
@@ -42,7 +42,7 @@ end
 
 M.toggle_inlay_hints = function()
   local bufnr = vim.api.nvim_get_current_buf()
-  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr }), { bufnr })
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr }, { bufnr })
 end
 
 function M.common_capabilities()
@@ -142,6 +142,8 @@ function M.config()
 
     lspconfig[server].setup(opts)
   end
+
+  lspconfig.tailwindcss.setup {}
 end
 
 return M

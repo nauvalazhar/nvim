@@ -36,7 +36,9 @@ function M.config()
     dim_inactive = false, -- dims inactive windows
     lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
 
-    on_colors = function(colors) end,
+    on_colors = function(colors)
+      colors.border = "#24283b"
+    end,
 
     on_highlights = function(highlights, colors) end,
   }
@@ -47,9 +49,9 @@ function M.config()
   -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#ffffff", fg = "#ffffff" })
   vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE", fg = "#888da4" })
   vim.api.nvim_set_hl(0, "TabLine", { bg = "NONE", fg = "#888da4" })
-  vim.api.nvim_set_hl(0, "TabLineSel", { bg = "NONE", fg = "#ffffff" })
-  vim.api.nvim_set_hl(0, "TabLineSelLeftRounded", { fg = "#888da4" })
-  vim.api.nvim_set_hl(0, "TabLineSelRightRounded", { fg = "#888da4" })
+  vim.api.nvim_set_hl(0, "TabLineSel", { bg = "#24283b", fg = "#ffffff" })
+  vim.api.nvim_set_hl(0, "TabLineSelLeftRounded", { fg = "#24283b" })
+  vim.api.nvim_set_hl(0, "TabLineSelRightRounded", { fg = "#24283b" })
 end
 
 return M

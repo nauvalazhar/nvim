@@ -35,7 +35,8 @@ vim.opt.wrap = false -- display lines as one long line
 vim.opt.scrolloff = 0
 vim.opt.sidescrolloff = 8
 vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
-vim.opt.title = false
+vim.opt.title = true
+vim.opt.titlestring = "%t"
 -- colorcolumn = "80",
 -- colorcolumn = "120",
 vim.opt.fillchars = vim.opt.fillchars + "eob: "
@@ -70,10 +71,10 @@ function _G.my_tabline()
 
   local s = ""
   s = s .. "%#TabLineFill#"
-  -- s = s .. "%#TabLineSelLeftRounded#" .. ""
+  s = s .. "%#TabLineSelLeftRounded#" .. ""
   s = s .. "%#TabLineSel#" -- Highlight for the file name
   s = s .. " " .. icon .. " " .. filename .. " "
-  s = s .. "%#TabLineSelRightRounded#" .. ""
+  s = s .. "%#TabLineSelRightRounded#" .. ""
   s = s .. "%#TabLine#" -- Normal highlight for the full path
   s = s .. " " .. filepath .. "/"
 
@@ -81,3 +82,10 @@ function _G.my_tabline()
 end
 
 vim.o.tabline = "%!v:lua.my_tabline()"
+
+local function open_nvim_tree()
+  -- open the tree
+  require("nvim-tree.api").tree.toggle { focus = false }
+end
+
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })

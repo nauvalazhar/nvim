@@ -23,6 +23,10 @@ keymap("n", "#", "#zz", opts)
 keymap("n", "g*", "g*zz", opts)
 keymap("n", "g#", "g#zz", opts)
 
+-- Terminal size
+keymap("t", "<C-j>", "<cmd>:resize -2<CR>")
+keymap("t", "<C-k>", "<cmd>resize +2<CR>")
+
 -- Navigate buffers
 keymap("n", "<C-l>", ":bnext<CR>", opts)
 keymap("n", "<C-h>", ":bprevious<CR>", opts)
@@ -52,6 +56,8 @@ keymap({ "n", "o", "i", "v" }, "<C-g>", function()
     icon = "📁",
   })
 end, opts)
+
+keymap("n", "<C-s>", "<cmd>:w<CR>", opts)
 
 vim.cmd [[:amenu 10.100 mousemenu.Goto\ Definition <cmd>lua vim.lsp.buf.definition()<CR>]]
 vim.cmd [[:amenu 10.110 mousemenu.References <cmd>lua vim.lsp.buf.references()<CR>]]

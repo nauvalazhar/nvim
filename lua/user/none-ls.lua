@@ -15,7 +15,9 @@ function M.config()
     debug = false,
     sources = {
       formatting.stylua,
-      formatting.prettier,
+      formatting.prettier.with {
+        extra_args = { "--config-precedence", "prefer-file", "--bracket-same-line", "--single-quote" },
+      },
       formatting.black,
       -- formatting.prettier.with {
       --   extra_filetypes = { "toml" },

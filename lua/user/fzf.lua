@@ -13,7 +13,8 @@ function M.config()
   require("fzf-lua").setup {
     winopts = {
       height = 0.5,
-      row = 2,
+      width = 0.5,
+      row = 0,
       backdrop = 100,
       preview = {
         hidden = "hidden",
