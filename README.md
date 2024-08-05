@@ -10,4 +10,5 @@ my nvim config file. stolen from https://github.com/LunarVim/Launch.nvim/
 
 ## Sneak-peek
 
-![image](https://github.com/user-attachments/assets/08bdb71c-5801-491d-8686-cccf7f05b1e1)
+<img width="1680" alt="image" src="https://github.com/user-attachments/assets/78dc4c39-8206-471b-8d3e-bb649e2c7ab2">
+
