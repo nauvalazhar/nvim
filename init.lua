@@ -277,7 +277,10 @@ vim.keymap.set('n', '<m-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 --   ))
 -- end
 
-vim.keymap.set('n', '<leader>e', ':Explore<CR>', { desc = 'Toggle [E]xplorer' })
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 18
+vim.g.netrw_browse_split = 4
+vim.keymap.set('n', '<leader>e', ':Lexplore<CR>', { desc = 'Toggle [E]xplorer' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -1070,10 +1073,10 @@ require('lazy').setup({
           enabled = true,
           auto_trigger = true,
           keymap = {
-            accept = '<m-l>',
-            next = '<m-j>',
-            prev = '<m-k>',
-            dismiss = '<m-h>',
+            accept = 'jl',
+            next = 'jk',
+            prev = 'jh',
+            dismiss = 'j;',
           },
         },
         filetypes = {
