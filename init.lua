@@ -279,8 +279,19 @@ vim.keymap.set('n', '<m-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 18
-vim.g.netrw_browse_split = 4
-vim.keymap.set('n', '<leader>e', ':Lexplore<CR>', { desc = 'Toggle [E]xplorer' })
+-- map <Leader>f :let @/=expand("%:t") <Bar> execute 'Explore' expand("%:h") <Bar> normal n<CR>
+-- vim.keymap.set('n', '<leader>e', ':Lexplore<CR>', { desc = 'Toggle [E]xplorer' })
+
+function _G.explore_and_highlight()
+  local current_file = vim.fn.expand '%:t'
+  local current_dir = vim.fn.expand '%:h'
+
+  vim.fn.setreg('/', current_file)
+  vim.cmd('Explore ' .. current_dir)
+  vim.cmd 'normal! n'
+end
+
+vim.api.nvim_set_keymap('n', '<Leader>e', '<Cmd>lua _G.explore_and_highlight()<CR>', { noremap = true, silent = true })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -812,6 +823,7 @@ require('lazy').setup({
         javascript = { 'prettier', stop_after_first = true },
         typescript = { 'prettier', stop_after_first = true },
         typescriptreact = { 'prettier', stop_after_first = true },
+        javascriptreact = { 'prettier', stop_after_first = true },
       },
     },
   },
